@@ -14,12 +14,25 @@ async function getData() {
 		const data = await response.json();
 		const pokemonImg = data.sprites.front_default; //This is where the img is within the api obj for the pokemon
 		const imgElement = document.getElementById("pokemon-img");
-
 		//Set pokemon img src to be the link from where in response the url is
 		imgElement.src = pokemonImg;
 
 		//Set the pokemon img to not be hidden anymore
 		imgElement.style.display = "block";
+
+		//Also get name, type, height, and weight
+		const nameOfPokemon = data.species.name;
+		const typeOfPokemon = data.types[0].type.name;
+		const heightOfPokemon = data.height;
+		const weightOfPokemon = data.weight;
+		const pokemonData = document.getElementById("pokemon-data");
+
+		pokemonData.innerHTML += `<ul>
+        <li>Name: ${nameOfPokemon}</li>
+        <li>Type: ${typeOfPokemon}</li>
+        <li>Height: ${heightOfPokemon}</li>
+        <li>Weight: ${weightOfPokemon}</li>
+        </ul>`;
 	} catch (error) {
 		console.log(error);
 	}
